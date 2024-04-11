@@ -1,3 +1,4 @@
+
 sealed trait Color
 case object Red extends Color
 case object Green extends Color
@@ -15,7 +16,7 @@ case object Reverse extends Value // has consequences on the direction of play
  * A card can be a colored card, a wild card or a wild draw 4 card.
  * A wild card can be played on any color. Its color is Black
  * A colored card has a color and a value. The value can be a number or a special card.
- */
+*/
 
 sealed trait CardType
 case class ColoredCard(color: Color, value:Value) extends CardType
@@ -31,7 +32,7 @@ class Card(val cardType:CardType) {
       case ColoredCard(color, _) => color match {
         case Red => Console.RED
         case Green => Console.GREEN
-        case Blue => Console.BLUE
+        case Blue => Console.RED
         case Yellow => Console.YELLOW
       }
       case WildCard => Console.BLACK
@@ -51,4 +52,15 @@ class Card(val cardType:CardType) {
        |${colorStr}+----+${Console.RESET}
        |""".stripMargin
   }
+}
+
+@main def main(): Unit = {
+  val card = new Card(ColoredCard(Red, Point(5)))
+  println(card)
+  val card2 = new Card(ColoredCard(Blue, Draw2))
+  println(card2)
+  val card3 = new Card(ColoredCard(Yellow, Skip))
+  println(card3)
+  val card4 = new Card(WildCard)
+  println(card4)
 }
