@@ -45,10 +45,12 @@ class Card(val cardType:CardType) {
       case WildCard => "# "
       case WildDraw4Card => "#4"
     }
-    s"""
-       |${colorStr}+----+
-       |${colorStr}| $cardTypeStr |
-       |${colorStr}+----+${Console.RESET}
-       |""".stripMargin
+    s"\n${colorStr}+----+\n" +
+      s"${colorStr}| $cardTypeStr |\n" +
+      s"${colorStr}+----+${Console.RESET}\n"
   }
+}
+
+class Field(val stack:Card, val draw:Card) {
+  override def toString: String = stack.toString
 }
